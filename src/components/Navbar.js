@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { FaAlignRight } from 'react-icons/fa';
-import Login from './LoginRegister';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { FaAlignRight } from "react-icons/fa";
 
 export default class Navbar extends Component {
   state = {
@@ -11,7 +10,7 @@ export default class Navbar extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
   onChangeLink() {
-    this.props.changeLink(this.state.homelink)
+    this.props.changeLink(this.state.homelink);
   }
   render() {
     return (
@@ -21,22 +20,22 @@ export default class Navbar extends Component {
             <Link to="/">
               <h1 className="saleLogo">Propert24</h1>
             </Link>
-            <button type="button" className="nav-btn" onClick={this.handleToggle}>
+            <button
+              type="button"
+              className="nav-btn"
+              onClick={this.handleToggle}
+            >
               <FaAlignRight className="nav-icon" />
-           
             </button>
-          
           </div>
-          <ul className={this.state.isOpen ? 'nav-links show-nav' : 'nav-links'}>
-            
+          <ul
+            className={this.state.isOpen ? "nav-links show-nav" : "nav-links"}
+          >
             <li>
-              <Link to={"/Login"}><a>Login/Register </a></Link>
-
+              <Link to={"/Login"}>Login/Register </Link>
             </li>
-
           </ul>
         </div>
-        
       </nav>
     );
   }

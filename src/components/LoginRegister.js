@@ -1,107 +1,162 @@
-import React, {Component} from 'react';
-import axios from 'axios';
-
+import React, { Component } from "react";
+import { User } from "zaio-property24-api/api/User";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      username: "",
+      password: "",
+      fullname: "",
+      isLogin: true,
+      errors: [],
+      message: ""
+    };
+  }
 
-    constructor(props){
-        super(props);
-        this.state ={
-            email: "",
-            password: "",
-            firebaese: "",
-            formTitle: 'Login',
-            loginBtn: true
+  setIsLogin = bool => {
+    this.setState({
+      isLogin: bool
+    });
+  };
 
-        };
-
-    }
-
-    
-    login = e => {
-        e.preventDefault();
-        axios.post('https://zaio-property24-api.herokuapp.com/login', {
-            username: this.state.email,
-            password: this.state.password,
-          })
-          .then(function (response) {
-            console.log('yay it worked',response);
-          })
-          .catch(function (error) {
-            console.log('got an error',error);
+  handleFormSubmit = e => {
+    e.preventDefault();
+    if (this.state.isLogin) {
+      const { username, password } = this.state;
+      new User(username, password)
+        .login()
+        .then(res => {
+          console.log(res);
+          if (res.error) {
+            this.setState({
+              errors: [res.error]
+            });
+          } else {
+            //redirect to /
+            document.location.pathname = "/";
+          }
+        })
+        .catch(err => {
+          this.setState({
+            errors: [err.message]
           });
-    }
-
-    register = e => {
-        console.log('trigger api call here')
-        e.preventDefault();
-        axios.post('https://zaio-property24-api.herokuapp.com/user', {
-            username: this.state.email,
-            password: this.state.password,
-          })
-          .then(function (response) {
-            console.log('yay it worked',response);
-          })
-          .catch(function (error) {
-            console.log('got an error',error);
+        });
+    } else {
+      const { username, password, email, fullname } = this.state;
+      new User(username, password, fullname, email)
+        .signup()
+        .then(res => {
+          if (res.error) {
+            this.setState({
+              errors: [res.error]
+            });
+          } else {
+            this.setState({
+              message: "Your account has been created.",
+              isLogin: true
+            });
+          }
+        })
+        .catch(err => {
+          this.setState({
+            errors: [err.message]
           });
-    
-        // fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-        // .catch((error) => {
-        //     this.setState({fireErrors: error.message})
-        // });
+        });
     }
+  };
 
-    getAction = action => {
-        if(action === 'reg'){
-            this.setState({formTitle: 'Register New User', loginBtn: false, fireErrors: ''});
-        }else{
-            this.setState({formTitle: 'Login', loginBtn: true, fireErrors: ''});
-        }
-    }
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-    handleChange = e => {
-        this.setState({[e.target.name]: e.target.value});
-    }
+  render() {
+    let errorNotification =
+      this.state.errors.length > 0 ? (
+        <div className="Error">{this.state.errors}</div>
+      ) : (
+        <></>
+      );
 
-    render(){
+    let messageNotification = this.state.message ? (
+      <div className="info">{this.state.message}</div>
+    ) : (
+      <></>
+    );
 
-        let errorNotification = this.state.fireErrors ? 
-            ( <div className="Error"> {this.state.fireErrors} </div> ) : null;
+    const formTitle = this.state.isLogin ? "Login" : "Sign up";
 
-        let submitBtn = this.state.loginBtn ? 
-            (<input className="loginBtn" type="submit" onClick={this.login} value="Enter" />) : 
-            (<input className="loginBtn" type="submit" onClick={this.register} value="Register" />);
+    const loginOnlySection = this.state.isLogin ? (
+      <div>
+        <button onClick={() => this.setIsLogin(false)}>New? Signup!</button>
+      </div>
+    ) : (
+      <></>
+    );
 
-        let login_register = this.state.loginBtn ?
-            (<button className="registerBtn" onClick={() => this.getAction('reg')}>Create account</button>) : 
-            (<button className="registerBtn" onClick={() => this.getAction('login')}>Have an account?</button>)
+    //only show when isLogin = false
+    const signupOnlySection = this.state.isLogin ? (
+      <></>
+    ) : (
+      <div>
+        Already registered?
+        <button onClick={() => this.setIsLogin(true)}>login!</button>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          value={this.state.email}
+          onChange={this.handleChange}
+        ></input>
+        <label htmlFor="email">Full name</label>
+        <input
+          type="text"
+          name="fullname"
+          value={this.state.fullname}
+          onChange={this.handleChange}
+        ></input>
+      </div>
+    );
 
-        return(
-            <div className="form_block">
-                <div id="title">{this.state.formTitle}</div>
-                <div className="body">
-                    {errorNotification}
-                    <form>
-                        <label for="male">Email Address</label>
-                        <input type="text" 
-                        value={this.state.email} 
-                        onChange={this.handleChange} 
-                        name="email" />
+    return (
+      <div className="form_block">
+        <div id="title">{formTitle}</div>
+        <div className="body">
+          {errorNotification}
+          {messageNotification}
 
-                        <label for="male">Password</label>
-                        <input type="password" 
-                        value={this.state.password} 
-                        onChange={this.handleChange} 
-                        name="password" />
+          <form>
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              value={this.state.username}
+              onChange={this.handleChange}
+              name="username"
+            />
 
-                        {submitBtn}
-                    </form>
-                    {login_register}
-                </div>
-            </div>
-        )
-    }
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+              name="password"
+            />
+
+            {loginOnlySection}
+
+            {signupOnlySection}
+
+            <input
+              type="submit"
+              value={formTitle}
+              onClick={this.handleFormSubmit}
+            ></input>
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Login;

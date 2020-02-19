@@ -1,16 +1,15 @@
- 
 /* //loginRegister */
-.form_block{
+.form_block {
   width: 400px;
   display: table;
   margin-top: 10%;
   margin-left: auto;
   margin-right: auto;
-  background-color: rgba(0,0,0,.1);
+  background-color: rgba(0, 0, 0, 0.1);
   padding: 5px;
   border-radius: 5px;
 }
-.form_block > #title{
+.form_block > #title {
   background: #2c38e9;
   padding: 10px;
   color: #fff;
@@ -19,15 +18,16 @@
   text-align: center;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
-  text-shadow: -1px -1px 0 rgba(0,0,0,.2);
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2);
 }
-.form_block > .body{
-	background: #FFFFFF;
+.form_block > .body {
+  background: #ffffff;
   padding: 10px;
   display: table;
 }
 
-input[type='text'],input[type='password'] {
+input[type="text"],
+input[type="password"] {
   height: 35px;
   width: 100%;
   margin-bottom: 10px;
@@ -39,7 +39,7 @@ input[type='text'],input[type='password'] {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
-.loginBtn{
+.loginBtn {
   height: 35px;
   box-sizing: border-box;
   padding: 4px 10px;
@@ -50,10 +50,10 @@ input[type='text'],input[type='password'] {
   border-radius: 3px;
   cursor: pointer;
 }
-.loginBtn:hover{
+.loginBtn:hover {
   background: #c3c3ba;
 }
-.registerBtn{
+.registerBtn {
   float: right;
   background: #2c38e9;
   color: #fff;
@@ -67,10 +67,10 @@ input[type='text'],input[type='password'] {
   cursor: pointer;
   margin-top: -35px;
 }
-.registerBtn:hover{
+.registerBtn:hover {
   background: #2c38e9;
 }
-.Error{
+.Error {
   padding: 10px;
   background-color: #feeaea;
   border: 1px solid #fadadb;
@@ -83,9 +83,9 @@ input[type='text'],input[type='password'] {
   box-sizing: border-box;
 }
 :root {
-  --primaryColor: #0F52BA;
+  --primaryColor: #0f52ba;
   --mainWhite: #fff;
-  --offWhite: #0F52BA;
+  --offWhite: #0f52ba;
   --mainBlack: #222;
   --mainGrey: #ececec;
   --darkGrey: #cfcfcf;
@@ -177,6 +177,7 @@ h6 {
   top: 0;
   left: 0;
   width: 100%;
+  height: 15%;
   padding: 0.75rem 2rem;
   background: var(--offWhite);
   z-index: 1;
@@ -191,7 +192,6 @@ h6 {
   margin: 0 auto;
   display: flex;
   padding: 0.75rem 2rem;
-
 }
 /* .houseImg {
   background: center/cover no-repeat;
@@ -215,12 +215,11 @@ h6 {
   padding: 5rem;
 }
 .nav-links a {
-  
   text-decoration: none;
   padding: 5rem 0;
   color: var(--mainBlack);
   transition: var(--mainTransition);
-  
+
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: var(--mainSpacing);
@@ -232,7 +231,7 @@ h6 {
 }
 
 .show-nav {
-  height: 100px;
+  /* height: 100px; */
 }
 @media screen and (min-width: 768px) {
   .nav-btn {
@@ -258,13 +257,13 @@ h6 {
 .defaultHero,
 .roomsHero {
   min-height: calc(100vh - 66px);
-  background: url('./images/defaultBcg.jpg') center/cover no-repeat;
+  background: url("./images/defaultBcg.jpg") center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .roomsHero {
-  background-image: url('./images/house-2.jpg');
+  background-image: url("./images/house-2.jpg");
   min-height: 60vh;
 }
 /* End of Hero */

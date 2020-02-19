@@ -1,0 +1,8 @@
+home
+
+      <!-- This doesn't work! -->
+      <Services />
+      <FeaturedRooms />
+
+rooms
+<RoomsContainer />

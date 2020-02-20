@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { User } from "zaio-property24-api/api/User";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 import { useHistory } from "react-router-dom";
+import "./LoginRegister.css";
 
 export default function Login(props) {
 	//function state
@@ -79,9 +80,16 @@ export default function Login(props) {
 	const signupOnlySection = isLogin ? (
 		<></>
 	) : (
-		<div>
+		<>
 			Already registered?
-			<button onClick={() => setIsLogin(true)}>login!</button>
+			<button
+				onClick={e => {
+					e.preventDefault();
+					setIsLogin(true);
+				}}
+			>
+				login!
+			</button>
 			<label htmlFor="email">Email</label>
 			<input
 				type="email"
@@ -96,7 +104,7 @@ export default function Login(props) {
 				value={fullname}
 				onChange={e => setFullname(e.target.value)}
 			></input>
-		</div>
+		</>
 	);
 
 	return (
@@ -127,6 +135,7 @@ export default function Login(props) {
 
 					<input
 						type="submit"
+						className="btn-primary"
 						value={formTitle}
 						onClick={handleFormSubmit}
 					></input>

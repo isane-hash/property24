@@ -1,0 +1,91 @@
+.navbar {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	background: rgba(27, 27, 117, 0.7);
+
+	a {
+		text-decoration: none;
+		color: unset;
+	}
+	.logo {
+		color: rgb(37, 37, 53);
+	}
+	.links {
+		display: flex;
+		justify-content: space-between;
+		width: 80%;
+		margin-left: 5%;
+		color: white;
+
+		a {
+			&:hover {
+				color: blue;
+			}
+		}
+	}
+}
+// .navbar-center ul li {
+// 	position: relati;
+// 	max-width: 1170px;
+// 	margin: 0 auto;
+// 	display: flex;
+// 	padding: 0.75rem 2rem;
+// }
+// /* .houseImg {
+//   background: center/cover no-repeat;
+// } */
+// .nav-btn {
+// 	background: transparent;
+// 	border: none;
+// 	cursor: pointer;
+// 	outline: none;
+// }
+// .nav-icon {
+// 	font-size: 1.5rem;
+// 	color: var(--primaryColor);
+// }
+// .nav-links {
+// 	height: 0;
+// 	overflow: hidden;
+// 	transition: var(--mainTransition);
+// 	list-style-type: none;
+// 	float: left;
+// 	padding: 5rem;
+// }
+// .nav-links a {
+// 	text-decoration: none;
+// 	padding: 5rem 0;
+// 	color: var(--mainBlack);
+// 	transition: var(--mainTransition);
+
+// 	font-size: 1rem;
+// 	font-weight: 600;
+// 	letter-spacing: var(--mainSpacing);
+// 	float: left;
+// 	padding: 0;
+// }
+// .nav-links a:hover {
+// 	color: var(--mainWhite);
+// }
+
+@media screen and (min-width: 768px) {
+	.nav-btn {
+		display: none;
+	}
+	.nav-center {
+		max-width: 1170px;
+		margin: 0 auto;
+		display: flex;
+	}
+	.nav-links {
+		height: auto;
+		display: flex;
+		margin-left: 4rem;
+	}
+	.nav-links a {
+		margin: 0 1rem;
+		padding: 0.5rem 0;
+	}
+}
+/* end of navbar */

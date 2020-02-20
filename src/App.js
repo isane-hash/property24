@@ -1,9 +1,9 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-// import "./App.css";
+import "./App.css";
 
-import Login from "./components/LoginRegister";
-import Navbar from "./components/Navbar";
+import Login from "./components/LoginRegister/LoginRegister";
+import Navbar from "./components/Navbar/Navbar";
 import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
 

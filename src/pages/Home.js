@@ -1,10 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Hero from '../components/Hero';
-import Banner from '../components/Banner';
-import RoomsContainer from '../components/RoomsContainer';
+import React from "react";
+import { Link } from "react-router-dom";
+import Hero from "../components/Hero";
+import Banner from "../components/Banner";
+// import RoomsContainer from "../compoonents/RoomsContainer";
 
-const home = () => {
+import PropertyList from "../components/PropertyList";
+
+const Home = props => {
   return (
     <>
       <Hero>
@@ -15,9 +17,9 @@ const home = () => {
         </Banner>
       </Hero>
 
-      <RoomsContainer />
+      <PropertyList />
     </>
   );
 };
 
-export default home;
+export default Home;

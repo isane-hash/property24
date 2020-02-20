@@ -19,12 +19,14 @@ function App() {
 		<UserProvider>
 			<CssBaseline />
 			<Navbar />
-			<Switch>
-				<Route exact path="/" component={HomePage} />
-				<Route path="/Login" component={Login} />
-				<Route path="/properties" component={PropertiesPage} />
-				<Route component={ErrorPage} />
-			</Switch>
+			<main>
+				<Switch>
+					<Route exact path="/" component={HomePage} />
+					<Route path="/Login" component={Login} />
+					<Route path="/properties" component={PropertiesPage} />
+					<Route component={ErrorPage} />
+				</Switch>
+			</main>
 			<Footer />
 		</UserProvider>
 	);

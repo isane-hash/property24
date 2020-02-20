@@ -11,9 +11,11 @@ export default function Navbar() {
 				<Toolbar>
 					{/* <CameraIcon className={classes.icon} /> */}
 					icon
-					<Typography variant="h6" color="inherit" noWrap>
-						Property24
-					</Typography>
+					<Link to="/">
+						<Typography variant="h6" color="inherit" noWrap>
+							Property24
+						</Typography>
+					</Link>
 					<div className="links">
 						<Link to="/Login">login</Link>
 						<Link to="/Login#signup">signup</Link>

@@ -31,7 +31,7 @@ export default function Footer() {
 				color="textSecondary"
 				component="p"
 			>
-				built by Jamie, James &nbsp; Isane
+				built by Jamie, James &amp; Isane
 			</Typography>
 			<Copyright />
 		</footer>

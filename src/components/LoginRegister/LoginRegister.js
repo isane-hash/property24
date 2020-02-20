@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { User } from "zaio-property24-api/api/User";
+import { User } from "@geimaj/zaio-property24-api/api/User";
 import { UserContext } from "../../context/UserContext";
 import { useHistory } from "react-router-dom";
 import "./LoginRegister.css";

@@ -1,16 +1,16 @@
 {
-	"name": "propertyg",
+	"name": "property1024",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@geimaj/zaio-property24-api": "0.0.0",
 		"@material-ui/core": "^4.9.3",
 		"node-sass": "^4.13.1",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
 		"react-icons": "^3.6.1",
 		"react-router-dom": "^5.0.0",
-		"react-scripts": "3.0.0",
-		"zaio-property24-api": "../zaio-property24-api/"
+		"react-scripts": "3.0.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",

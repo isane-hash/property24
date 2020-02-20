@@ -13,7 +13,7 @@ export default function Navbar() {
 					icon
 					<Link to="/">
 						<Typography variant="h6" color="inherit" noWrap>
-							Property24
+							Property1024
 						</Typography>
 					</Link>
 					<div className="links">

@@ -10,7 +10,7 @@ import PropertyProvider, { PropertyContext } from "../context/PropertyContext";
 import { UserContext } from "../context/UserContext";
 
 import Properties from "../containers/Properties";
-import { Property as PropertyApi } from "zaio-property24-api/api/Property";
+import { Property as PropertyApi } from "@geimaj/zaio-property24-api/api/Property";
 
 const useStyles = makeStyles(theme => ({
 	heroContent: {

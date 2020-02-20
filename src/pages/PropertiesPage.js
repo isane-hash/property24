@@ -1,24 +1,18 @@
-import React from "react";
-import AppBar from "@material-ui/core/AppBar";
+import React, { useState, useContext, useEffect, Suspense } from "react";
 
 import Button from "@material-ui/core/Button";
-// import CameraIcon from "@material-ui/icons/PhotoCamera";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
+import PropertyProvider, { PropertyContext } from "../context/PropertyContext";
+import { UserContext } from "../context/UserContext";
+
+import Properties from "../containers/Properties";
+import { Property as PropertyApi } from "zaio-property24-api/api/Property";
 
 const useStyles = makeStyles(theme => ({
-	icon: {
-		marginRight: theme.spacing(2)
-	},
 	heroContent: {
 		backgroundColor: theme.palette.background.paper,
 		padding: theme.spacing(8, 0, 6)
@@ -43,15 +37,28 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-export default function Album() {
+function PropertiesPage() {
 	const classes = useStyles();
+	const [isPropertySearch, setIsPropertySearch] = useState(true);
+	const { properties, setProperties } = useContext(PropertyContext);
+	const { user } = useContext(UserContext);
+
+	//fetch properties everytime user is updated
+	useEffect(() => {
+		(async () => {
+			if (user.id) {
+				try {
+					setProperties(await PropertyApi.getAll());
+				} catch (err) {
+					throw err;
+				}
+			}
+		})();
+	}, [user]);
 
 	return (
 		<React.Fragment>
 			<CssBaseline />
-
 			<main>
 				{/* Hero unit */}
 				<div className={classes.heroContent}>
@@ -63,79 +70,57 @@ export default function Album() {
 							color="textPrimary"
 							gutterBottom
 						>
-							Album layout
+							Luxury awaits
 						</Typography>
-						<Typography
-							variant="h5"
-							align="center"
-							color="textSecondary"
-							paragraph
-						>
-							Something short and leading about the collection
-							below—its contents, the creator, etc. Make it short
-							and sweet, but not too short so folks don&apos;t
-							simply skip over it entirely.
-						</Typography>
+						<div>search bar here</div>
 						<div className={classes.heroButtons}>
 							<Grid container spacing={2} justify="center">
 								<Grid item>
-									<Button variant="contained" color="primary">
-										Main call to action
+									<Button
+										variant={
+											isPropertySearch
+												? "contained"
+												: "outlined"
+										}
+										color="primary"
+										onClick={() =>
+											setIsPropertySearch(true)
+										}
+									>
+										Properties
 									</Button>
 								</Grid>
 								<Grid item>
-									<Button variant="outlined" color="primary">
-										Secondary action
+									<Button
+										variant={
+											!isPropertySearch
+												? "contained"
+												: "outlined"
+										}
+										color="primary"
+										onClick={() =>
+											setIsPropertySearch(false)
+										}
+									>
+										Agents
 									</Button>
 								</Grid>
 							</Grid>
 						</div>
 					</Container>
 				</div>
-				<Container className={classes.cardGrid} maxWidth="md">
-					{/* End hero unit */}
-					<Grid container spacing={4}>
-						{cards.map(card => (
-							<Grid item key={card} xs={12} sm={6} md={4}>
-								<Card className={classes.card}>
-									<CardMedia
-										className={classes.cardMedia}
-										image="https://source.unsplash.com/random"
-										title="Image title"
-									/>
-									<CardContent
-										className={classes.cardContent}
-									>
-										<Typography
-											gutterBottom
-											variant="h5"
-											component="h2"
-										>
-											Heading
-										</Typography>
-										<Typography>
-											This is a media card. You can use
-											this section to describe the
-											content.
-										</Typography>
-									</CardContent>
-									<CardActions>
-										<Button size="small" color="primary">
-											View
-										</Button>
-										<Button size="small" color="primary">
-											Edit
-										</Button>
-									</CardActions>
-								</Card>
-							</Grid>
-						))}
-					</Grid>
-				</Container>
+				<Suspense>
+					<Properties properties={properties} />
+				</Suspense>
 			</main>
-			{/* Footer */}
-
-			{/* End footer */}
 		</React.Fragment>
+	);
+}
+
+export default function() {
+	return (
+		<PropertyProvider>
+			<PropertiesPage />
+		</PropertyProvider>
 	);
 }

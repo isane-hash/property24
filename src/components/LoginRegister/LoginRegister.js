@@ -27,8 +27,6 @@ export default function Login(props) {
 			new User(username, password)
 				.login()
 				.then(res => {
-					console.log("login res:");
-					console.log(res);
 					if (res.error) {
 						setErrors([res.error]);
 					} else {

@@ -2,26 +2,30 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
 
-import Login from "./components/LoginRegister/LoginRegister";
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+import Login from "./components/LoginRegister/LoginRegister";
 import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
+import PropertiesPage from "./pages/PropertiesPage";
 
 import UserProvider from "./context/UserContext";
-// import UserAPI from "zaio-property24-api/api/User";
+
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 function App() {
 	console.log(document.cookie);
 	return (
 		<UserProvider>
+			<CssBaseline />
 			<Navbar />
 			<Switch>
 				<Route exact path="/" component={HomePage} />
-				{/* <Route exact path="/rooms/" component={Rooms} />
-        <Route exact path="/rooms/:slug" component={SingleRoom} /> */}
-				<Route exact path="/Login" component={Login} />
+				<Route path="/Login" component={Login} />
+				<Route path="/properties" component={PropertiesPage} />
 				<Route component={ErrorPage} />
 			</Switch>
+			<Footer />
 		</UserProvider>
 	);
 }

@@ -1,162 +1,132 @@
-import React, { Component } from "react";
+import React, { useContext, useState } from "react";
 import { User } from "zaio-property24-api/api/User";
+import { UserContext } from "../context/UserContext";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      username: "",
-      password: "",
-      fullname: "",
-      isLogin: true,
-      errors: [],
-      message: ""
-    };
-  }
+export default function Login(props) {
+  //function state
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [isLogin, setIsLogin] = useState(true);
+  const [errors, setErrors] = useState([]);
+  const [message, setMessage] = useState("");
 
-  setIsLogin = bool => {
-    this.setState({
-      isLogin: bool
-    });
-  };
+  //context
+  const { setUser } = useContext(UserContext);
 
-  handleFormSubmit = e => {
+  const handleFormSubmit = e => {
     e.preventDefault();
-    if (this.state.isLogin) {
-      const { username, password } = this.state;
+    if (isLogin) {
       new User(username, password)
         .login()
         .then(res => {
+          console.log("login res:");
           console.log(res);
           if (res.error) {
-            this.setState({
-              errors: [res.error]
-            });
+            setErrors([res.error]);
           } else {
+            setUser(res);
             //redirect to /
             document.location.pathname = "/";
           }
         })
         .catch(err => {
-          this.setState({
-            errors: [err.message]
-          });
+          setErrors([err.message]);
         });
     } else {
-      const { username, password, email, fullname } = this.state;
       new User(username, password, fullname, email)
         .signup()
         .then(res => {
           if (res.error) {
-            this.setState({
-              errors: [res.error]
-            });
+            setErrors([res.err]);
           } else {
-            this.setState({
-              message: "Your account has been created.",
-              isLogin: true
-            });
+            setMessage("Your account has been created");
+            setIsLogin(true);
           }
         })
         .catch(err => {
-          this.setState({
-            errors: [err.message]
-          });
+          setErrors([err.message]);
         });
     }
   };
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  let errorNotification =
+    errors.length > 0 ? <div className="Error">{errors}</div> : <></>;
 
-  render() {
-    let errorNotification =
-      this.state.errors.length > 0 ? (
-        <div className="Error">{this.state.errors}</div>
-      ) : (
-        <></>
-      );
+  let messageNotification = message ? (
+    <div className="info">{message}</div>
+  ) : (
+    <></>
+  );
 
-    let messageNotification = this.state.message ? (
-      <div className="info">{this.state.message}</div>
-    ) : (
-      <></>
-    );
+  const formTitle = isLogin ? "Login" : "Sign up";
 
-    const formTitle = this.state.isLogin ? "Login" : "Sign up";
+  const loginOnlySection = isLogin ? (
+    <div>
+      <button onClick={() => setIsLogin(false)}>New? Signup!</button>
+    </div>
+  ) : (
+    <></>
+  );
 
-    const loginOnlySection = this.state.isLogin ? (
-      <div>
-        <button onClick={() => this.setIsLogin(false)}>New? Signup!</button>
+  //only show when isLogin = false
+  const signupOnlySection = isLogin ? (
+    <></>
+  ) : (
+    <div>
+      Already registered?
+      <button onClick={() => setIsLogin(true)}>login!</button>
+      <label htmlFor="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+      ></input>
+      <label htmlFor="email">Full name</label>
+      <input
+        type="text"
+        name="fullname"
+        value={fullname}
+        onChange={e => setFullname(e.target.value)}
+      ></input>
+    </div>
+  );
+
+  return (
+    <div className="form_block">
+      <div id="title">{formTitle}</div>
+      <div className="body">
+        {errorNotification}
+        {messageNotification}
+
+        <form>
+          {signupOnlySection}
+          {loginOnlySection}
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            name="username"
+          />
+
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            name="password"
+          />
+
+          <input
+            type="submit"
+            value={formTitle}
+            onClick={handleFormSubmit}
+          ></input>
+        </form>
       </div>
-    ) : (
-      <></>
-    );
-
-    //only show when isLogin = false
-    const signupOnlySection = this.state.isLogin ? (
-      <></>
-    ) : (
-      <div>
-        Already registered?
-        <button onClick={() => this.setIsLogin(true)}>login!</button>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          value={this.state.email}
-          onChange={this.handleChange}
-        ></input>
-        <label htmlFor="email">Full name</label>
-        <input
-          type="text"
-          name="fullname"
-          value={this.state.fullname}
-          onChange={this.handleChange}
-        ></input>
-      </div>
-    );
-
-    return (
-      <div className="form_block">
-        <div id="title">{formTitle}</div>
-        <div className="body">
-          {errorNotification}
-          {messageNotification}
-
-          <form>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              value={this.state.username}
-              onChange={this.handleChange}
-              name="username"
-            />
-
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              name="password"
-            />
-
-            {loginOnlySection}
-
-            {signupOnlySection}
-
-            <input
-              type="submit"
-              value={formTitle}
-              onClick={this.handleFormSubmit}
-            ></input>
-          </form>
-        </div>
-      </div>
-    );
-  }
+    </div>
+  );
 }
-
-export default Login;

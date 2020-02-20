@@ -1,29 +1,29 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 // import "./App.css";
 
-// import Rooms from "./pages/Rooms";
-// import SingleRoom from "./pages/SingleRoom";
-// import Error from "./pages/Error";
-// import Login from "./components/LoginRegister";
-import Login from "./hoc/LoginHoc";
+import Login from "./components/LoginRegister";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
+import ErrorPage from "./pages/Error";
+import HomePage from "./pages/Home";
 
-import { Switch, Route } from "react-router-dom";
+import UserProvider from "./context/UserContext";
+// import UserAPI from "zaio-property24-api/api/User";
 
 function App() {
-  return (
-    <>
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        {/* <Route exact path="/rooms/" component={Rooms} />
-        <Route exact path="/rooms/:slug" component={SingleRoom} />
-      <Route component={Error} /> */}
-        <Route exact path="/Login" component={Login} />
-      </Switch>
-    </>
-  );
+	console.log(document.cookie);
+	return (
+		<UserProvider>
+			<Navbar />
+			<Switch>
+				<Route exact path="/" component={HomePage} />
+				{/* <Route exact path="/rooms/" component={Rooms} />
+        <Route exact path="/rooms/:slug" component={SingleRoom} /> */}
+				<Route exact path="/Login" component={Login} />
+				<Route component={ErrorPage} />
+			</Switch>
+		</UserProvider>
+	);
 }
 
 export default App;

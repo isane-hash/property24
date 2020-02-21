@@ -13,18 +13,23 @@ import PropertiesPage from "./pages/PropertiesPage";
 import UserProvider from "./context/UserContext";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
+import PropertyProvider from "./context/PropertyContext";
+import { AutoLogin } from "./hoc/AutoLogin";
 
 function App() {
-	console.log(document.cookie);
 	return (
 		<UserProvider>
 			<CssBaseline />
+			<AutoLogin />
 			<Navbar />
 			<main>
 				<Switch>
 					<Route exact path="/" component={HomePage} />
-					<Route path="/Login" component={LoginPage} />
-					<Route path="/properties" component={PropertiesPage} />
+					<Route path="/login" component={LoginPage} />
+
+					<PropertyProvider>
+						<Route path="/properties" component={PropertiesPage} />
+					</PropertyProvider>
 					<Route component={ErrorPage} />
 				</Switch>
 			</main>

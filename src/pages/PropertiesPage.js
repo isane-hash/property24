@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 function PropertiesPage() {
 	const classes = useStyles();
 	const [isPropertySearch, setIsPropertySearch] = useState(true);
-	const { properties, setProperties } = useContext(PropertyContext);
+	const [properties, setProperties] = useContext(PropertyContext);
 	const { user } = useContext(UserContext);
 
 	//fetch properties everytime user is updated

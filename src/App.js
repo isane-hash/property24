@@ -4,7 +4,8 @@ import "./App.css";
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import Login from "./components/LoginRegister/LoginRegister";
+// import Login from "./components/LoginRegister/LoginRegister";
+import LoginPage from "./pages/LoginPage";
 import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
 import PropertiesPage from "./pages/PropertiesPage";
@@ -22,7 +23,7 @@ function App() {
 			<main>
 				<Switch>
 					<Route exact path="/" component={HomePage} />
-					<Route path="/Login" component={Login} />
+					<Route path="/Login" component={LoginPage} />
 					<Route path="/properties" component={PropertiesPage} />
 					<Route component={ErrorPage} />
 				</Switch>

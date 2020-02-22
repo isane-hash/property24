@@ -12,7 +12,9 @@ const PropertyProvider = ({ children }) => {
 			beds: 4,
 			baths: 4,
 			price: 2000000,
-			images: [],
+			images: [
+				"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.telegraph.co.uk%2Fcontent%2Fdam%2FTravel%2Fhotels%2Fafrica%2Fsouth-africa%2Fcape-town%2Fone-and-only-cape-town-p.jpg&f=1&nofb=1"
+			],
 			city: ""
 		}
 	]);

@@ -5,10 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { PropertyContext } from "../context/PropertyContext";
-import { UserContext } from "../context/UserContext";
+import { PropertyContext } from "../../context/PropertyContext";
+import { UserContext } from "../../context/UserContext";
 
-import Properties from "../containers/Properties";
+import Properties from "../../containers/Properties";
 import { Property as PropertyApi } from "@geimaj/zaio-property24-api/api/Property";
 import { useHistory } from "react-router-dom";
 

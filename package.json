@@ -16,6 +16,7 @@
 	"scripts": {
 		"build": "react-scripts build",
 		"start": "node start-server.js",
+		"dev": "react-scripts start",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},

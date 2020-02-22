@@ -7,7 +7,8 @@ import Footer from "./components/Footer/Footer";
 import LoginPage from "./pages/LoginPage";
 import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
-import PropertiesPage from "./pages/PropertiesPage";
+import PropertiesPage from "./pages/Property/PropertiesPage";
+import PropertyPage from "./pages/Property/PropertyPage";
 
 import UserProvider from "./context/UserContext";
 
@@ -28,6 +29,7 @@ function App() {
 
 					<PropertyProvider>
 						<Route path="/properties" component={PropertiesPage} />
+						<Route path="/property" component={PropertyPage} />
 					</PropertyProvider>
 					<Route component={ErrorPage} />
 				</Switch>

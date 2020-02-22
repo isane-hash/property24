@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
 	cardGrid: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles(theme => ({
 }));
 export default function Properties({ properties }) {
 	const classes = useStyles();
+	const history = useHistory();
 
 	return (
 		<Container className={classes.cardGrid} maxWidth="md">
@@ -55,7 +57,15 @@ export default function Properties({ properties }) {
 								<Typography>R{property.price}</Typography>
 							</CardContent>
 							<CardActions>
-								<Button size="small" color="primary">
+								<Button
+									size="small"
+									color="primary"
+									onClick={() => {
+										history.push(
+											`/property?id=${property.id}`
+										);
+									}}
+								>
 									View
 								</Button>
 								<Button size="small" color="primary">

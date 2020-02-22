@@ -26,10 +26,8 @@ const useStyles = makeStyles(theme => ({
 		flexGrow: 1
 	}
 }));
-// const classes = {};
 export default function Properties({ properties }) {
 	const classes = useStyles();
-	console.log(properties);
 
 	return (
 		<Container className={classes.cardGrid} maxWidth="md">

@@ -7,7 +7,7 @@ export function AutoLogin() {
 
 	if (user.id === null) {
 		User.whoami().then(user => {
-			if (user.id && user.username != "noone") {
+			if (user.id && user.username !== "noone") {
 				setUser(user);
 			}
 		});
